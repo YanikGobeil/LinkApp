@@ -19,17 +19,13 @@ namespace LinkMobile.ViewModels.Base
             {
                 typeof(HomePageViewModel),
                 typeof(MenuPageViewModel),
-                typeof(ReservationViewModel),
-                typeof(TrackingViewModel)
-
+                typeof(ReservationViewModel)  
             };
 
             _serviceInstances = new Dictionary<Type, Type>
             {
                 { typeof(IMasterNavigationService), typeof(MasterNavigationService) },
-                { typeof(IPageService), typeof(PageService) },
-                { typeof(IReservationService), typeof(ReservationService) },
-                { typeof(IPositionService), typeof(PositionService) }
+                { typeof(IPageService), typeof(PageService) }
             };
         }
 

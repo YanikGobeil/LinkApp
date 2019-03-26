@@ -8,42 +8,82 @@
         <StackLayout Padding="10"
                      Orientation="Vertical">
             <StackLayout
-                Orientation="Vertical"
                 Spacing="6"
                 Padding="0,3,0,3">
                 <Label 
-                 VerticalOptions="StartAndExpand"
-                 HorizontalOptions="StartAndExpand"    
-                 Text="Destination"
-                 TextDecorations="Underline">
+                    VerticalOptions="StartAndExpand"
+                    HorizontalOptions="CenterAndExpand"    
+                    Text="Destination"
+                    TextColor="DarkGreen"
+                    TextDecorations="Underline"
+                    FontSize="Large">
                 </Label>
-                
-                
+                <Picker
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="Start"
+                    Title="Choisir une destination..."
+                    SelectedItem="{Binding Direction}"
+                    ItemsSource="{Binding DirectionsList}"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged">
+
+                </Picker>
             </StackLayout>
+
             <StackLayout
-                Orientation="Vertical"
                 Spacing="6"
                 Padding="0,3,0,3">
                 <Label Text="Date et heure"
-                VerticalOptions="StartAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                TextDecorations="Underline"/>
-                <StackLayout
-                    Spacing="10">
-                    <DatePicker
-                    HorizontalOptions="StartAndExpand">
-                    </DatePicker>
-                </StackLayout>
-                <StackLayout>
-                    <Picker
+                        VerticalOptions="StartAndExpand" 
+                        HorizontalOptions="CenterAndExpand" 
+                        TextColor="DarkGreen"
+                        TextDecorations="Underline"
+                        FontSize="Large">
+                </Label>
+
+                <DatePicker
                     HorizontalOptions="StartAndExpand"
-                    Title="Heures disponible"
-                    ItemsSource="">
-                    </Picker>
-                </StackLayout>
-                
+                    VerticalOptions="StartAndExpand"
+                    DateSelected="DatePicker_DateSelected"
+                    Date="{Binding SelectedDate}"
+                    MinimumDate="{Binding MinDate}"
+                    Format="dd/MM/yyyy">
+                </DatePicker>
+
+
+                <Picker
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="Start"
+                Title="Choisir une heure disponible..."
+                ItemsSource="{Binding TimeList}"
+                SelectedItem="{Binding UserReservationTime}">
+                </Picker>
             </StackLayout>
-                
+            
+            <StackLayout
+                Spacing="6"
+                Padding="0,3,0,3"
+                Orientation="Horizontal">
+                <Button
+                    HorizontalOptions="EndAndExpand"
+                    Text="ANNULER"
+                    Clicked="Cancel_Button_Clicked"
+                    BackgroundColor="Transparent"
+                     FontSize="Medium">
+                </Button>
+                <Button
+                    HorizontalOptions="End"
+                    Text="OK"
+                    Clicked="Button_Clicked"
+                    TextColor="DarkGreen"
+                    BackgroundColor="Transparent"
+                    FontSize="Medium">
+                </Button>
+            </StackLayout>
+
+
+
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

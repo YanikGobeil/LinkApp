@@ -6,12 +6,12 @@ namespace LinkMobile.Models
 {
     public class Reservation
     {
-        string Time { get; set; }
+        public string Time { get; set; }
 
-        string Date { get; set; }
+        public string Date { get; set; }
 
-        string Cip { get; set; }
+        public string Cip { get; set; }
 
-        string directions { get; set; }
+        public string Directions { get; set; }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
-using Xamarin;
 
 namespace LinkMobile.iOS
 {
@@ -24,7 +23,6 @@ namespace LinkMobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            FormsMaps.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

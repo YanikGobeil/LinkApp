@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LinkMobile.Views.ReservationPage"
+             Title="Réservation">
+    
+    <ContentPage.Content>
+        <StackLayout Padding="10"
+                     Orientation="Vertical">
+            <StackLayout
+                Orientation="Vertical"
+                Spacing="6"
+                Padding="0,3,0,3">
+                <Label 
+                 VerticalOptions="StartAndExpand"
+                 HorizontalOptions="StartAndExpand"    
+                 Text="Destination"
+                 TextDecorations="Underline">
+                </Label>
+                
+                
+            </StackLayout>
+            <StackLayout
+                Orientation="Vertical"
+                Spacing="6"
+                Padding="0,3,0,3">
+                <Label Text="Date et heure"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                TextDecorations="Underline"/>
+                <StackLayout
+                    Spacing="10">
+                    <DatePicker
+                    HorizontalOptions="StartAndExpand">
+                    </DatePicker>
+                </StackLayout>
+                <StackLayout>
+                    <Picker
+                    HorizontalOptions="StartAndExpand"
+                    Title="Heures disponible"
+                    ItemsSource="">
+                    </Picker>
+                </StackLayout>
+                
+            </StackLayout>
+                
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

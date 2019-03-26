@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkMobile.Services.Interfaces
 {
     public interface IReservationService
     {
-        Task<List<string>> getAvailableHours(string directions, string date);
+        List<string> getAvailableHours(string directions);
 
-        Task<Reservation> getUserActiveReservation(string cip);
+        Reservation getUserActiveReservation(string cip);
     }
 }

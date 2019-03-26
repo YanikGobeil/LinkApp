@@ -23,8 +23,6 @@ namespace LinkMobile.ViewModels
 
         public ICommand OpenNewConnectionCommand => new Command(OpenNewConnection);
 
-        public ICommand OpenLocalisationCommand => new Command(async () => await OpenLocalisation());
-
         public MenuPageViewModel(IMasterNavigationService masterNavigationService)
         {
             _masterNavigationService = masterNavigationService;
@@ -42,7 +40,7 @@ namespace LinkMobile.ViewModels
 
         private async Task OpenReservation()
         {
-            await _masterNavigationService.PushAsync(new ReservationPage());
+            await _masterNavigationService.NavigateToPage(new ReservationPage());
         }
 
         private async Task OpenMyReservations()
@@ -56,10 +54,6 @@ namespace LinkMobile.ViewModels
             //_masterNavigationService.SetMainPage(new AuthentificationPage());
         }
 
-        private async Task OpenLocalisation()
-        {
-            await _masterNavigationService.PushAsync(new TrackingPage());
-        }
-
+        
     }
 }

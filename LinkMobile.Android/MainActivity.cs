@@ -6,7 +6,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Xamarin;
 
 namespace LinkMobile.Droid
 {
@@ -20,7 +19,6 @@ namespace LinkMobile.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            FormsMaps.Init(this, savedInstanceState);
             LoadApplication(new App());
         }
     }

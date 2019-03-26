@@ -5,9 +5,9 @@
              x:Class="LinkMobile.Views.CustomControllers.NavigationButton"
              x:Name="this">
 
-    <ContentView.Resources>
+    <!-- <ContentView.Resources>
         <converters:StringToResourceConverter x:Key="stringToResourceConverter"/>
-    </ContentView.Resources>
+    </ContentView.Resources>-->
 
     <AbsoluteLayout HeightRequest="{Binding Size, Source={x:Reference this}}" 
                     WidthRequest="{Binding Size, Source={x:Reference this}}">
