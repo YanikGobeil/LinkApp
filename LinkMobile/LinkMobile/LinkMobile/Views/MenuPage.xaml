@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControllers="clr-namespace:LinkMobile.Views.CustomControllers"
+             x:Class="LinkMobile.Views.MenuPage"
+             Title="Accueil">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout BackgroundColor="#404040"
+                        Padding="20">
+
+                <Label Text="LinkMobile"
+                   TextColor="White"
+                   FontSize="30"
+                   HorizontalOptions="Center"/>
+
+            </StackLayout>
+
+            <ScrollView>
+                <StackLayout Padding="10">
+
+                    <customControllers:NavigationItem Text="ACCUEIL"
+                                                  TapCommand="{Binding OpenHomeCommand}"/>
+                    <BoxView Color="Gray" HeightRequest="1"/>
+
+                    <customControllers:NavigationItem Text="HORAIRE"
+                                                  TapCommand="{Binding OpenScheduleCommand}"/>
+
+                    <customControllers:NavigationItem Text="RÉSERVATION"
+                                                  TapCommand="{Binding OpenReservationCommand}"/>
+
+                    <BoxView Color="Gray" HeightRequest="1"/>
+                    <customControllers:NavigationItem Text="MES RÉSERVATIONS"
+                                                  TapCommand="{Binding OpenMyReservationsCommand}"/>
+
+                    <BoxView Color="Gray" HeightRequest="1"/>
+                        <customControllers:NavigationItem Text="LOCALISATION"
+                                                  TapCommand="{Binding OpenLocalisationCommand}"/>
+
+                        <BoxView Color="Gray" HeightRequest="1"/>
+                    <customControllers:NavigationItem Text="DÉCONNEXION"
+                                                  TapCommand="{Binding OpenNewConnectionCommand}"/>
+
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
