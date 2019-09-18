@@ -4,14 +4,14 @@ using System.Text;
 
 namespace LinkMobile.Network.Response
 {
-    public class ReservationResponse
+    public class ReservationResponse : BaseResponse
     {
-        public string date;
+        public DateTime startDateTime;
 
-        public string heure;
+        public DateTime endDateTime;
 
-        public string cip;
+        public string userCIP;
 
-        public string directions;
+        public string directionName;
     }
 }

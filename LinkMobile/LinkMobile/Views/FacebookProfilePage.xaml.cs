@@ -1,7 +1,4 @@
-﻿using LinkMobile.Services.Interfaces;
-using LinkMobile.ViewModels;
-using LinkMobile.ViewModels.Base;
-using LinkMobile.Views.Converters;
+﻿using LinkMobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +10,14 @@ using Xamarin.Forms.Xaml;
 
 namespace LinkMobile.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomePage : ContentPage
-    {
-        private HomePageViewModel _viewModel;
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class FacebookProfilePage : ContentPage
+	{
+        private string ClientId = "363743677910968";
 
-        private Page MainPage
-        {
-            get { return Application.Current.MainPage; }
-            set { Application.Current.MainPage = value; }
-        }
-    
-        public HomePage()
-        {
-            InitializeComponent();
-
-            _viewModel = ViewModelLocator.Resolve<HomePageViewModel>();
-            BindingContext = _viewModel;
+        public FacebookProfilePage ()
+		{
+			InitializeComponent ();
 
             var apiRequest =
                 "https://www.facebook.com/dialog/oauth?client_id="
@@ -45,29 +33,7 @@ namespace LinkMobile.Views
             webView.Navigated += WebViewOnNavigated;
 
             Content = webView;
-
         }
-
-        protected override bool OnBackButtonPressed()
-        {
-            App.NavPage = new NavigationPage(new HomePage());
-            ((MasterDetailPage)MainPage).Detail = App.NavPage;
-            return true;
-        }
-
-        
-        protected override void OnAppearing()
-        {
-           // _viewModel?.UpdateCommand?.Execute(null);
-        }
-
-        protected override void OnDisappearing()
-        {
-            _viewModel?.CancelRunningTaskCommand?.Execute(null);
-        }
-
-        private string ClientId = "363743677910968";
-
 
         private async void WebViewOnNavigated(object sender, WebNavigatedEventArgs e)
         {
@@ -80,7 +46,7 @@ namespace LinkMobile.Views
 
                 await vm.SetFacebookUserProfileAsync(accessToken);
 
-                //Content = MainStackLayout;
+                Content = MainStackLayout;
             }
         }
 
@@ -89,7 +55,7 @@ namespace LinkMobile.Views
             if (url.Contains("access_token") && url.Contains("&expires_in="))
             {
                 var at = url.Replace("https://www.facebook.com/connect/login_success.html#access_token=", "");
-
+           
                 if (Device.OS == TargetPlatform.WinPhone || Device.OS == TargetPlatform.Windows)
                 {
                     at = url.Replace("https://www.facebook.com/connect/login_success.html#access_token=", "");

@@ -15,6 +15,8 @@ namespace LinkMobile.Views
 		public MainPage ()
 		{
 			InitializeComponent ();
-		}
-	}
+            
+        }
+        
+    }
 }

@@ -6,12 +6,14 @@ namespace LinkMobile.Network.Request
 {
     public class PostReservationRequest
     {
-        public string date;
+        public DateTime startDateTime;
 
-        public string heure;
+        public DateTime endDateTime;
 
-        public string cip;
+        public string userCIP;
 
-        public string directions;
+        public string directionName;
     }
+
+   
 }

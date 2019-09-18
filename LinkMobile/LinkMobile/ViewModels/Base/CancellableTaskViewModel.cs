@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace LinkMobile.ViewModels.Base
 {
-    public class CancellableTaskViewModel
+    public class CancellableTaskViewModel : BaseViewModel
     {
         protected UniqueExecutionTaskQueue _uniqueExecutionTaskQueue;
 

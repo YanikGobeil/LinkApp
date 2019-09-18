@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:LinkMobile.ViewModels;assembly=LinkMobile"
+             x:Class="LinkMobile.Views.FacebookProfilePage"
+             Title="Facebook Profile"
+             BackgroundColor="White">
+    <ContentPage.BindingContext>
+        <viewModels:FacebookViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout x:Name="MainStackLayout"
+               Padding="8,30">
+
+        <StackLayout Orientation="Horizontal"
+                 Padding="0,20,0,50">
+
+
+            <StackLayout Orientation="Vertical">
+
+                <Label Text="{Binding FacebookProfile.Name, StringFormat='Name: {0:N}'}"
+               TextColor="Black"
+               Font="Bold"
+               FontSize="22"/>
+
+            </StackLayout>
+
+        </StackLayout>
+
+    </StackLayout>
+</ContentPage>

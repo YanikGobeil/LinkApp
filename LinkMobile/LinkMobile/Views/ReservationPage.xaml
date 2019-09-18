@@ -1,27 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LinkMobile.Views.ReservationPage"
              Title="Réservation">
     
     <ContentPage.Content>
-        <StackLayout Padding="10"
-                     Orientation="Vertical">
+        <StackLayout Padding="10,60"
+                     Orientation="Vertical"
+                     VerticalOptions="FillAndExpand"
+                     BackgroundColor="#e8eaed">
             <StackLayout
                 Spacing="6"
                 Padding="0,3,0,3">
                 <Label 
-                    VerticalOptions="StartAndExpand"
-                    HorizontalOptions="CenterAndExpand"    
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="Start"    
                     Text="Destination"
                     TextColor="DarkGreen"
-                    TextDecorations="Underline"
                     FontSize="Large">
                 </Label>
                 <Picker
-                    HorizontalOptions="StartAndExpand"
+                    HorizontalOptions="FillAndExpand"
                     VerticalOptions="Start"
                     Title="Choisir une destination..."
+                    HeightRequest="70"
                     SelectedItem="{Binding Direction}"
                     ItemsSource="{Binding DirectionsList}"
                     SelectedIndexChanged="Picker_SelectedIndexChanged">
@@ -31,38 +33,41 @@
 
             <StackLayout
                 Spacing="6"
-                Padding="0,3,0,3">
+                Padding="0,120,0,3">
                 <Label Text="Date et heure"
-                        VerticalOptions="StartAndExpand" 
-                        HorizontalOptions="CenterAndExpand" 
+                        VerticalOptions="FillAndExpand" 
+                        HorizontalOptions="Start" 
                         TextColor="DarkGreen"
-                        TextDecorations="Underline"
                         FontSize="Large">
                 </Label>
 
                 <DatePicker
-                    HorizontalOptions="StartAndExpand"
+                    HorizontalOptions="FillAndExpand"
                     VerticalOptions="StartAndExpand"
                     DateSelected="DatePicker_DateSelected"
                     Date="{Binding SelectedDate}"
+                    HeightRequest="70"
                     MinimumDate="{Binding MinDate}"
                     Format="dd/MM/yyyy">
                 </DatePicker>
 
 
                 <Picker
-                HorizontalOptions="StartAndExpand"
+                HorizontalOptions="FillAndExpand"
                 VerticalOptions="Start"
                 Title="Choisir une heure disponible..."
                 ItemsSource="{Binding TimeList}"
-                SelectedItem="{Binding UserReservationTime}">
+                HeightRequest="70"
+                SelectedItem="{Binding UserReservationTime}"
+                Focused="Picker_Focused">
                 </Picker>
             </StackLayout>
             
-            <StackLayout
+            <StackLayout VerticalOptions="FillAndExpand"  
                 Spacing="6"
                 Padding="0,3,0,3"
                 Orientation="Horizontal">
+                 <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Orientation="Horizontal">  
                 <Button
                     HorizontalOptions="EndAndExpand"
                     Text="ANNULER"
@@ -79,6 +84,7 @@
                     FontSize="Medium">
                 </Button>
             </StackLayout>
+                       </StackLayout>
 
 
 

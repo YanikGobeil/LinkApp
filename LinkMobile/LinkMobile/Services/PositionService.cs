@@ -18,6 +18,7 @@ namespace LinkMobile.Services
             currentpos.Longitude = -71.927801;
 
 
+
             return currentpos;
         }
 

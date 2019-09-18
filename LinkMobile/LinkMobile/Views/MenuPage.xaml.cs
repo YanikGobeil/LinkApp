@@ -18,6 +18,8 @@ namespace LinkMobile.Views
 		{
 			InitializeComponent ();
             BindingContext = ViewModelLocator.Resolve<MenuPageViewModel>();
+            
         }
-	}
+
+    }
 }

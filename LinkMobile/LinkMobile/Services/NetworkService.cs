@@ -13,7 +13,7 @@ namespace LinkMobile.Services
 {
     public class NetworkService : INetworkService
     {
-        private const string RootUrl = "http://zeus.gel.usherbrooke.ca:8080/intramurus-api/";
+        private const string RootUrl = "https://link-udes-api.herokuapp.com/api/";
         private const string ContentType = "application/json";
         private const string TokenKey = "jwt";
         private const string Token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NTEzMzAwMDAsInVzZXIiOiJ7XCJjaXBcIjpcInRlc3QxMjM0XCIsXCJub21cIjpcIkJlYXVsaWV1XCIsXCJwcmVub21cIjpcIlBhdHJpY2tcIixcImVtYWlsXCI6XCJQYXRyaWNrLkJlYXVsaWV1M0BVU2hlcmJyb29rZS5jYVwifSJ9.8_Dc3XnA6j5ill93GI4HGSPChPwcBv6sbXdJcAU54FI";

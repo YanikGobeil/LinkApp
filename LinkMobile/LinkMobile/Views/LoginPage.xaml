@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:LinkMobile.Views.Converters"
+             x:Class="LinkMobile.Views.LoginPage"
+             Title="Connexion à LinkMobile"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <converters:StringToResourceConverter x:Key="stringToResourceConverter"/>
+    </ContentPage.Resources>
+
+    <StackLayout Orientation="Vertical">
+
+        <Label Text="Bienvenue sur LinkMobile"
+           FontSize="66"
+           FontFamily="Sprint"
+           TextColor="Black"
+           HorizontalTextAlignment="Center"
+           Margin="10,10,0,0"/>
+
+        <Button Text="Connexion avec Facebook"                
+            TextColor="White"
+            BackgroundColor="White"
+            Font="Bold"
+            FontSize="26"
+            BorderColor="Black"
+            BorderWidth="2"
+            BorderRadius="3"
+            Margin="5,5,5,5"
+            Clicked="LoginWithFacebook_Clicked"
+            />
+
+        <Button Text="Connexion avec Google"
+            TextColor="White"
+            BackgroundColor="White"
+            Font="Bold"
+            FontSize="26"
+            BorderColor="Black"
+            BorderWidth="2"
+            BorderRadius="3"
+            Margin="5,5,5,5"
+            Clicked="LoginWithGoogle_Clicked"/>
+
+    </StackLayout> 
+    
+</ContentPage>

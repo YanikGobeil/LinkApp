@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "202966964366",
+    "firebase_url": "https://linkmobile.firebaseio.com",
+    "project_id": "linkmobile",
+    "storage_bucket": "linkmobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202966964366:android:11860a88bac0c1621491df",
+        "android_client_info": {
+          "package_name": "com.companyname.LinkMobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202966964366-sknms8akhjf21fg7lv1cmbsjtau7nq2t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.companyname.LinkMobile",
+            "certificate_hash": "bebf13579fdafc620d02a119b09a8df8dc65267e"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSazLxUc_YU0hG84pxCHzn870mbzgRhZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

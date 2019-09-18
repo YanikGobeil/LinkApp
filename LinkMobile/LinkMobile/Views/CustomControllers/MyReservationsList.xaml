@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LinkMobile.Views.CustomControllers.MyReservationsList"
+             xmlns:converters="clr-namespace:LinkMobile.Views.Converters"
+             x:Name="this"
+             BackgroundColor="White"
+             VerticalOptions="FillAndExpand">
+
+    <ContentView.Resources>
+        <converters:CountToVisibilityConverter x:Key="countToVisibilityConverter"/>
+    </ContentView.Resources>
+
+    <StackLayout>
+
+        <Label Text="{Binding EmptyListMessage, Source={x:Reference this}}"
+               FontSize="Large"
+               VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"
+               HorizontalTextAlignment="Center"
+               IsVisible="False">
+
+            <Label.Triggers>
+
+                <MultiTrigger TargetType="Label">
+                    <MultiTrigger.Conditions>
+                        <BindingCondition Binding="{Binding IsRefreshing, Source={x:Reference this}}" Value="false"/>
+                        <BindingCondition Binding="{Binding MyReservations.Count, Source={x:Reference this}, Converter={StaticResource countToVisibilityConverter}}" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="IsVisible" Value="True" />
+                </MultiTrigger>
+
+                <MultiTrigger TargetType="Label">
+                    <MultiTrigger.Conditions>
+                        <BindingCondition Binding="{Binding IsRefreshing, Source={x:Reference this}}" Value="false"/>
+                        <BindingCondition Binding="{Binding MyReservations.Count, Source={x:Reference this}, Converter={StaticResource countToVisibilityConverter}}" Value="true"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="IsVisible" Value="False" />
+                </MultiTrigger>
+
+            </Label.Triggers>
+        </Label>
+
+        <ListView ItemsSource="{Binding MyReservations, Source={x:Reference this}}"
+                  ItemTapped="ListView_ItemSelected"
+                  SelectedItem="{Binding SelectedReservation, Mode=TwoWay}"
+                  HasUnevenRows="True"
+                  SeparatorColor="LightGray"
+                  IsRefreshing="{Binding IsRefreshing, Source={x:Reference this}}">
+
+            <ListView.Triggers>
+                <DataTrigger TargetType="ListView" 
+                             Binding="{Binding IsRefreshing, Source={x:Reference this}}" 
+                             Value="False">
+                    <Setter Property="IsVisible" 
+                            Value="{Binding MyReservations.Count, Source={x:Reference this}, Converter={StaticResource countToVisibilityConverter}}" />
+                </DataTrigger>
+            </ListView.Triggers>
+
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="8"
+                              RowSpacing="5"
+                              ColumnSpacing="8">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Label Text="test"
+                                           TextColor="Black"
+                                           Grid.Row="0"
+                                           Grid.Column="1"
+                                           HorizontalOptions="StartAndExpand"/>
+
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentView>

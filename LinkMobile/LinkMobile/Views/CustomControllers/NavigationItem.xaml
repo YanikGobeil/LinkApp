@@ -1,19 +1,22 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Grid xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LinkMobile.Views.CustomControllers.NavigationItem"
-             x:Name="this"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+      xmlns:converters="clr-namespace:LinkMobile.Views.Converters"
+      x:Class="LinkMobile.Views.CustomControllers.NavigationItem" 
+      x:Name="this" 
       Padding="15">
-
-    <Label Text="{Binding Text, Source={x:Reference this}}"
-           FontSize="Medium"
-           TextColor="Black"
-           FontAttributes="Bold"
-           HorizontalOptions="Center"
-           VerticalOptions="Center"/>
-
+      <Grid.Resources>
+        <converters:StringToResourceConverter x:Key="stringToResourceConverter"/>
+    </Grid.Resources>
+    <Grid HeightRequest="22">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="7*" />
+        </Grid.ColumnDefinitions>
+        <Image HorizontalOptions="Start" Grid.Column="0" Source="{Binding Resource, Source={x:Reference this}, Converter={StaticResource stringToResourceConverter}}"/>
+        <Label Grid.Column="1" Text="{Binding Text, Source={x:Reference this}}" FontSize="Medium" TextColor="Gray" FontAttributes="Bold"  VerticalOptions="Center" />
+    </Grid>
     <Grid.GestureRecognizers>
-        <TapGestureRecognizer Command="{Binding TapCommand, Source={x:Reference this}}"/>
+        <TapGestureRecognizer Command="{Binding TapCommand, Source={x:Reference this}}" />
     </Grid.GestureRecognizers>
-
 </Grid>

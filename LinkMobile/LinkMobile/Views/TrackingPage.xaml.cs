@@ -24,8 +24,8 @@ namespace LinkMobile.Views
 
         protected override void OnAppearing()
         {
-            _viewModel?.SetRouteCommand?.Execute(null);
-            _viewModel?.SetPositionsCommand?.Execute(null);
+            //_viewModel?.SetPositionsCommand?.Execute(null);           
+            _viewModel?.SetScriptCommand?.Execute(null);
         }
 	}
 }

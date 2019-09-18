@@ -13,6 +13,15 @@ namespace LinkMobile.Views.CustomControllers
         public static readonly BindableProperty TapCommandProperty =
             BindableProperty.Create(nameof(TapCommand), typeof(ICommand), typeof(NavigationItem));
 
+        public static readonly BindableProperty ImageProperty =
+            BindableProperty.Create(nameof(Resource), typeof(string), typeof(NavigationItem));
+
+        public string Resource
+        {
+            get { return (string)GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
+        }
+
         public string Text
         {
             get { return (string)GetValue(TextProperty); }

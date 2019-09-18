@@ -7,6 +7,6 @@
              Title="Localisation">
     
     <ContentPage.Content>
-        <customControllers:BindableMap MapType="Street" MapPosition="{Binding UserPosition}" MapPins="{Binding VehiculePositionPins}" RouteCoordinates="{Binding RouteCoordinates}"/>    
+        <customControllers:BindableMap HasScrollEnabled="False" MapType="Hybrid" MapPosition="{Binding UserPosition}" MapPins="{Binding VehiculePositionPins}" RouteCoordinates="{Binding RouteCoordinates}"/>    
     </ContentPage.Content>
 </ContentPage>

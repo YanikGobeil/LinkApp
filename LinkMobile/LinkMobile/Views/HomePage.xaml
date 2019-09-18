@@ -1,18 +1,51 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:LinkMobile.Views.Converters;assembly=Converters"
-             x:Class="LinkMobile.Views.HomePage"
+             xmlns:customControllers="clr-namespace:LinkMobile.Views.CustomControllers"
+             xmlns:viewModels="clr-namespace:LinkMobile.ViewModels;assembly=LinkMobile"
+             x:Class="LinkMobile.Views.HomePage"     
              Title="Accueil">
-    <ContentPage.Content>
-        <Grid BackgroundColor="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2.5*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="50" />
-            </Grid.RowDefinitions>
-            <Image x:Name="myImage" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" Grid.RowSpan="2"/>
-        </Grid>
+    
+    <ContentPage.BindingContext>
+        <viewModels:FacebookViewModel/>
+    </ContentPage.BindingContext>
+    
+        <StackLayout>
 
-    </ContentPage.Content>
+            <Grid RowSpacing="20"
+              Padding="20, 20, 10, 20"
+              VerticalOptions="FillAndExpand">
+
+                <StackLayout Grid.Row="0">
+
+                    <StackLayout Orientation="Horizontal">
+
+                        <Label Text="Mes réservations"
+                           FontSize="Medium"
+                           TextColor="Black"
+                           VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand"/>
+                        
+                    </StackLayout>
+
+                    <StackLayout Padding="0, 0, 10, 0"
+                             VerticalOptions="FillAndExpand">
+
+                        <StackLayout BackgroundColor="#555555"
+                                 VerticalOptions="FillAndExpand"
+                                 Padding="2">
+ 
+                            <customControllers:MyReservationsList IsRefreshing="{Binding MyReservationsViewModel.IsRefreshing}"
+                                                                  ModifyReservationCommand="{Binding MyReservationsViewModel.ModifyReservation}"
+                                                                  EmptyListMessage="Aucune réservation à afficher" />
+                                                                 <!-- MyReservations ="{Binding MyReservationsViewModel.MyReservationsDisplay}"  -->
+                        </StackLayout>
+                    </StackLayout>
+
+                </StackLayout>
+
+                
+            </Grid>
+        </StackLayout>
+
 </ContentPage>

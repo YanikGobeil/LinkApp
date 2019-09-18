@@ -35,7 +35,7 @@ namespace LinkMobile.Views
 
         private void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
-            _viewModel?.DateSelectedCommand?.Execute(e.NewDate);
+            _viewModel?.DateSelectedCommand?.Execute(null);
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -52,5 +52,13 @@ namespace LinkMobile.Views
         {
             _viewModel?.CancelReservationCommand?.Execute(null);
         }
+
+        private void Picker_Focused(object sender, FocusEventArgs e)
+        {
+           // _viewModel?.DirectionSelectedCommand?.Execute(null);
+        }
     }
+
+
 }
+

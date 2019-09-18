@@ -9,9 +9,8 @@
 	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="LinkMobile.Android" android:icon="@mipmap/launcher_foreground">
-    <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyB5L8gpfRIm9Rs5Gj-lbVeZewy93v2Vm7U" /> 
-  <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-  </application>
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyB5L8gpfRIm9Rs5Gj-lbVeZewy93v2Vm7U" />
+		<meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+	</application>
 	<!-- <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyB5L8gpfRIm9Rs5Gj-lbVeZewy93v2Vm7U" /> -->
-  
 </manifest>

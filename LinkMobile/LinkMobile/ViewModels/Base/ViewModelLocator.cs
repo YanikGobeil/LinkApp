@@ -29,7 +29,8 @@ namespace LinkMobile.ViewModels.Base
                 { typeof(IMasterNavigationService), typeof(MasterNavigationService) },
                 { typeof(IPageService), typeof(PageService) },
                 { typeof(IReservationService), typeof(ReservationService) },
-                { typeof(IPositionService), typeof(PositionService) }
+                { typeof(IPositionService), typeof(PositionService) },
+                { typeof(INetworkService), typeof(NetworkService) }
             };
         }
 

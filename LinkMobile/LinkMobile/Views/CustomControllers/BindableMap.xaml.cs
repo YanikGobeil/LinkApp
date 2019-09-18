@@ -67,7 +67,7 @@ namespace LinkMobile.Views.CustomControllers
                  {
                      ((BindableMap)b).MoveToRegion(MapSpan.FromCenterAndRadius(
                           (Position)n,
-                          Distance.FromKilometers(0.2)));
+                          Distance.FromKilometers(0.3)));
                  });
 
         public Position MapPosition { get; set; }

@@ -9,22 +9,30 @@ namespace LinkMobile
 {
     public partial class App : Application
     {
-        public static NavigationPage NavPage = new NavigationPage(new HomePage());
+        public static NavigationPage NavPage;
         public App()
         {
             InitializeComponent();
             ViewModelLocator.Initialize();
-            MainPage = new MainPage
+            NavPage = new NavigationPage(new HomePage());
+            //MainPage = new HomePage();
+               
+          /*  MainPage = new MainPage
             {
                 Detail = NavPage,
                 Master = new MenuPage()
+            };*/
+
+            MainPage = new NavigationPage(new LoginPage())
+            {
+                Title = "Facebook Login"
             };
 
         }
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            // Handle when your app starts.. Will have to navigate cache to see active connection
         }
 
         protected override void OnSleep()
