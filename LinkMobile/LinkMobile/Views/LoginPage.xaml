@@ -21,7 +21,7 @@
 
         <Button Text="Connexion avec Facebook"                
             TextColor="White"
-            BackgroundColor="White"
+            BackgroundColor="DeepSkyBlue"
             Font="Bold"
             FontSize="26"
             BorderColor="Black"
@@ -33,7 +33,7 @@
 
         <Button Text="Connexion avec Google"
             TextColor="White"
-            BackgroundColor="White"
+            BackgroundColor="DeepSkyBlue"
             Font="Bold"
             FontSize="26"
             BorderColor="Black"
