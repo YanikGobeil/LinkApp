@@ -21,7 +21,7 @@
 
         <Button Text="Connexion avec Facebook"                
             TextColor="White"
-            BackgroundColor="DeepSkyBlue"
+            BackgroundColor="White"
             Font="Bold"
             FontSize="26"
             BorderColor="Black"
