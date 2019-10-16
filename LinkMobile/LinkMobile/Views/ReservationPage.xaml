@@ -26,7 +26,7 @@
                     HeightRequest="70"
                     SelectedItem="{Binding Direction}"
                     ItemsSource="{Binding DirectionsList}"
-                    SelectedIndexChanged="Picker_SelectedIndexChanged">
+                    SelectedIndexChanged="Direction_Changed">
 
                 </Picker>
             </StackLayout>
@@ -44,11 +44,11 @@
                 <DatePicker
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="StartAndExpand"
-                    DateSelected="DatePicker_DateSelected"
                     Date="{Binding SelectedDate}"
                     HeightRequest="70"
                     MinimumDate="{Binding MinDate}"
-                    Format="dd/MM/yyyy">
+                    Format="dd/MM/yyyy"
+                    DateSelected="Date_Selected">
                 </DatePicker>
 
 

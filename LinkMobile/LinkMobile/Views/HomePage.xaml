@@ -9,8 +9,8 @@
     <ContentPage.BindingContext>
         <viewModels:FacebookViewModel/>
     </ContentPage.BindingContext>
-    
-        <StackLayout>
+
+    <StackLayout x:Name="MainStackLayout" >
 
             <Grid RowSpacing="20"
               Padding="20, 20, 10, 20"

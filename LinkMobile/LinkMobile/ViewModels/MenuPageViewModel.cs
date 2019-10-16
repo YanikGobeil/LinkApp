@@ -1,4 +1,8 @@
-﻿using LinkMobile.Services.Interfaces;
+﻿using LinkMobile.Models;
+using LinkMobile.Services;
+using LinkMobile.Services.Interfaces;
+using LinkMobile.Services.Interfaces.Persistence;
+using LinkMobile.Static;
 using LinkMobile.Views;
 using System;
 using System.Collections.Generic;
@@ -12,6 +16,8 @@ namespace LinkMobile.ViewModels
     public class MenuPageViewModel : BaseViewModel
     {
         private IMasterNavigationService _masterNavigationService;
+        private IPersistenceService _persistenceService;
+        private FacebookService facebookService;
 
         public ICommand OpenHomeCommand => new Command(async () => await OpenHome());
 
@@ -25,14 +31,16 @@ namespace LinkMobile.ViewModels
 
         public ICommand OpenLocalisationCommand => new Command(async () => await OpenLocalisation());
 
-        public MenuPageViewModel(IMasterNavigationService masterNavigationService)
+        public MenuPageViewModel(IMasterNavigationService masterNavigationService, IPersistenceService persistenceService)
         {
             _masterNavigationService = masterNavigationService;
+            _persistenceService = persistenceService;
+            facebookService = new FacebookService();
         }
 
         private async Task OpenHome()
         {
-            await _masterNavigationService.NavigateToPage(new HomePage());
+            await _masterNavigationService.NavigateToPage(new HomePage(false));
         }
 
         private async Task OpenSchedule()
@@ -50,10 +58,34 @@ namespace LinkMobile.ViewModels
             //await _masterNavigationService.NavigateToPage(new MyReservationsPage());
         }
 
-        private void OpenNewConnection()
+        private async void OpenNewConnection()
         {
-            //_networkService.SetToken(string.Empty);
-            //_masterNavigationService.SetMainPage(new AuthentificationPage());
+            //clear fb data if connected by fb
+            if (StaticValues.accessToken != null && StaticValues.staticFacebookProfile != null)
+            {
+
+                await facebookService.Logout(StaticValues.accessToken, StaticValues.staticFacebookProfile.Id);
+
+                StaticValues.staticFacebookProfile = null;
+                StaticValues.accessToken = null;
+            }
+
+            //clear google data if connected by google
+            IGoogleUsersData _userDataHandler = DependencyService.Get<IGoogleUsersData>();
+            User user = _userDataHandler.GetGoogleUsersData();
+            if (user != null)
+            {
+                _userDataHandler.ClearGoogleUserData();
+            }
+                   
+            //clear the persistence
+            _persistenceService.ClearPreferences();
+
+            //clear webviews cache
+            DependencyService.Get<IWebCookiesPersistenceService>().RemoveCookies();
+
+            //go to login
+            _masterNavigationService.SetMainPage(new LoginPage());
         }
 
         private async Task OpenLocalisation()

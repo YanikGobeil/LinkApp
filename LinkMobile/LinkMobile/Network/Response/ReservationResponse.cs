@@ -10,7 +10,7 @@ namespace LinkMobile.Network.Response
 
         public DateTime endDateTime;
 
-        public string userCIP;
+        public string userEmail;
 
         public string directionName;
     }

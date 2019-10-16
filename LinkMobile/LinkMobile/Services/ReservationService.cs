@@ -20,7 +20,7 @@ namespace LinkMobile.Services
             _networkService = networkService;
         }
 
-        public async Task<List<string>> GetAllHours(string directions)
+        public List<string> GetAllHours(string directions)
         {
             List<string> hourList;
             if (directions == "3IT")
@@ -59,13 +59,14 @@ namespace LinkMobile.Services
         public async Task<List<Reservation>> GetUserActiveReservations(string path, string cip, CancellationToken token)
         {
             var now = DateTime.Now;
-            var response = new ReservationResponse()
-            {
-                directionName = "3IT",
-                endDateTime = now,
-                startDateTime = now,
-                userCIP = "goby2801"
-            };
+            var response = new ReservationResponse();
+
+            response.directionName = "3IT";
+            response.endDateTime = now;
+            response.startDateTime = now;
+            if (Static.StaticValues.staticFacebookProfile != null)
+                response.userEmail = Static.StaticValues.staticFacebookProfile.Email;
+            
 
             List<Reservation> reservations = new List<Reservation>();
             reservations.Add(NetworkResponseConverter.ConvertReservationResponseToReservation(response));
@@ -84,7 +85,7 @@ namespace LinkMobile.Services
         public async Task<List<ReservationResponse>> GetReservationsForDateAndDirections(string path, string directions, DateTime selectedDate, CancellationToken token)
         {
             string dateStr = selectedDate.ToString("yyyy-MM-dd HH:mm:ss");
-            var response = await _networkService.GetListAsync<ReservationResponse>($"reservations/byDate/{dateStr}" + "/" + $"{ directions}", token);
+            var response =  await _networkService.GetListAsync<ReservationResponse>($"reservations/byDate/" + dateStr + "/" + directions, token);
             return response; 
         }
     }

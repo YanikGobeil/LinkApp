@@ -11,14 +11,15 @@
             <StackLayout Padding="10" VerticalOptions="FillAndExpand">
                     <customControllers:NavigationItem Text="Acceuil" TapCommand="{Binding OpenHomeCommand}" Resource="white_home_icon" />
                     <BoxView Color="#61666d" HeightRequest="0.5" />
-                    <customControllers:NavigationItem Text="Horaire" TapCommand="{Binding OpenScheduleCommand}" Resource="schedule_icon" />
+                     <!-- <customControllers:NavigationItem Text="Horaire" TapCommand="{Binding OpenScheduleCommand}" Resource="schedule_icon" /> -->
                     <customControllers:NavigationItem Text="Réservation" TapCommand="{Binding OpenReservationCommand}" Resource="reservation_icon" />
                     <BoxView Color="#61666d" HeightRequest="0.5" />
-                    <customControllers:NavigationItem Text="Mes Réservations" TapCommand="{Binding OpenMyReservationsCommand}" Resource="account_icon" />
-                    <BoxView Color="#61666d" HeightRequest="0.5" />
+                    <!--<customControllers:NavigationItem Text="Mes Réservations" TapCommand="{Binding OpenMyReservationsCommand}" Resource="account_icon" />
+                    <BoxView Color="#61666d" HeightRequest="0.5" /> -->
                     <customControllers:NavigationItem Text="Localisation" TapCommand="{Binding OpenLocalisationCommand}" Resource="map_icon2" />
                     <BoxView Color="#61666d" HeightRequest="0.5" />
-                    <customControllers:NavigationItem Margin="45" Text="Déconnexion" TapCommand="{Binding OpenNewConnectionCommand}" />
+                    <customControllers:NavigationItem Text="Déconnexion" TapCommand="{Binding OpenNewConnectionCommand}" Resource="logout_icon"/>
+                    <BoxView Color="#61666d" HeightRequest="0.5" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

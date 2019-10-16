@@ -1,7 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon />
+    <Win32Resource />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -14,6 +16,7 @@
     <None Remove="Resources\logo1.png" />
     <None Remove="Resources\account_icon.png" />
     <None Remove="Resources\black_home_icon.png" />
+    <None Remove="Resources\logout-icon.jpg" />
     <None Remove="Resources\map_icon2.png" />
     <None Remove="Resources\map_icon1.png" />
     <None Remove="Resources\photo_equipe.png" />
@@ -27,6 +30,7 @@
     <EmbeddedResource Include="Resources\logo1.png" />
     <EmbeddedResource Include="Resources\account_icon.png" />
     <EmbeddedResource Include="Resources\black_home_icon.png" />
+    <EmbeddedResource Include="Resources\logout-icon.jpg" />
     <EmbeddedResource Include="Resources\map_icon2.png" />
     <EmbeddedResource Include="Resources\map_icon1.png" />
     <EmbeddedResource Include="Resources\photo_equipe.png" />
@@ -36,15 +40,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="NUnit" Version="3.11.0" />
+    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="Autofac.Extras.MvvmCross" Version="4.0.2" />
+    <PackageReference Include="MvvmCross.StarterPack" Version="5.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="Plugin.Facebook" Version="1.0.0" />
     <PackageReference Include="Plugin.Google" Version="1.0.1" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
-    <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.0.4" />
-    <PackageReference Include="Xamarin.Forms.Maps" Version="3.4.0.1008975" />  
+    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
+    <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
+    <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.2.1" />
+    <PackageReference Include="Xamarin.Forms.Maps" Version="4.2.0.815419" />  
   </ItemGroup>
 
   <ItemGroup>
@@ -60,7 +70,10 @@
     <EmbeddedResource Update="Views\CustomControllers\NavigationItem.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\FacebookProfilePage.xaml">
+    <EmbeddedResource Update="Views\FacebookConfirmLoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\GoogleLoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\HomePage.xaml">

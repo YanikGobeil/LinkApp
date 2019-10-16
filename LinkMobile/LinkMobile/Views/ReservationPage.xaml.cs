@@ -33,20 +33,11 @@ namespace LinkMobile.Views
             _viewModel?.OnDisappearingCommand?.Execute(null);
         }
 
-        private void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
-        {
-            _viewModel?.DateSelectedCommand?.Execute(null);
-        }
-
         private void Button_Clicked(object sender, EventArgs e)
         {
             _viewModel?.CreateReservationCommand?.Execute(null);
         }
 
-        private void Picker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            _viewModel?.DirectionSelectedCommand?.Execute(null);
-        }
 
         private void Cancel_Button_Clicked(object sender, EventArgs e)
         {
@@ -55,7 +46,17 @@ namespace LinkMobile.Views
 
         private void Picker_Focused(object sender, FocusEventArgs e)
         {
-           // _viewModel?.DirectionSelectedCommand?.Execute(null);
+           _viewModel?.OnHoursFocused?.Execute(null);
+        }
+
+        private void Direction_Changed(object sender, EventArgs e)
+        {
+            _viewModel?.DirectionChangedCommand?.Execute(null);
+        }
+
+        private void Date_Selected(object sender, EventArgs e)
+        {
+            _viewModel?.DateSelectedCommand?.Execute(null);
         }
     }
 

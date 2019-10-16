@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 using Xamarin;
+using Firebase;
 
 namespace LinkMobile.iOS
 {
@@ -25,6 +26,7 @@ namespace LinkMobile.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             FormsMaps.Init();
+            Firebase.Core.App.Configure();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

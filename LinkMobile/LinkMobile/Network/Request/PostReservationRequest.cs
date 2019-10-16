@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinkMobile.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,9 +11,11 @@ namespace LinkMobile.Network.Request
 
         public DateTime endDateTime;
 
-        public string userCIP;
+        public User user;
 
         public string directionName;
+
+        public int reservationId;
     }
 
    

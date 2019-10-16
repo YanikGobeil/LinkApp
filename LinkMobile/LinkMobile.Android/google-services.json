@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "202966964366-sknms8akhjf21fg7lv1cmbsjtau7nq2t.apps.googleusercontent.com",
+          "client_id": "202966964366-ocp2m2urmmkehlogcemop1e3p0gaoirt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.companyname.LinkMobile",
-            "certificate_hash": "bebf13579fdafc620d02a119b09a8df8dc65267e"
+            "certificate_hash": "20628afc08ae0b9371ec6601a43a7e327b973d90"
           }
         }
       ],
@@ -30,7 +30,15 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202966964366-ubupnf34l6j2mol8n5jthsiopf0r5hlh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.companyName.LinkMobile"
+              }
+            }
+          ]
         }
       }
     }

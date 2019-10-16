@@ -59,7 +59,7 @@ namespace LinkMobile.Services
 
         public void ResetMasterPage()
         {
-            App.NavPage = new NavigationPage(new HomePage());
+            App.NavPage = new NavigationPage(new HomePage(false));
 
             var masterPage = new MainPage
             {
@@ -74,7 +74,7 @@ namespace LinkMobile.Services
         {
             if (MainPage.GetType() != typeof(T))
             {
-                MainPage = page;
+                MainPage = new NavigationPage(page);
             }
         }
     }

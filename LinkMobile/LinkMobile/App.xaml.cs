@@ -14,10 +14,10 @@ namespace LinkMobile
         {
             InitializeComponent();
             ViewModelLocator.Initialize();
-            NavPage = new NavigationPage(new HomePage());
-            //MainPage = new HomePage();
+            NavPage = new NavigationPage(new LoginPage());
                
-          /*  MainPage = new MainPage
+            /*
+            MainPage = new MainPage
             {
                 Detail = NavPage,
                 Master = new MenuPage()
@@ -25,7 +25,21 @@ namespace LinkMobile
 
             MainPage = new NavigationPage(new LoginPage())
             {
-                Title = "Facebook Login"
+                //Title = "Facebook Login"
+            };
+
+        }
+
+        public App(bool isReloaded)
+        {
+            InitializeComponent();
+            ViewModelLocator.Initialize();
+            NavPage = new NavigationPage(new MainPage());
+            
+            MainPage = new MainPage
+            {
+                Detail = NavPage,
+                Master = new MenuPage()
             };
 
         }

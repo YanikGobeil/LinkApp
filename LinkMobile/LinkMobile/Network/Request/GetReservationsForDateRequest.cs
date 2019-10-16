@@ -4,8 +4,10 @@ using System.Text;
 
 namespace LinkMobile.Network.Request
 {
-    public class GetReservationsForDateRequest
+    public class GetReservationsByDateAndDirectionRequest
     {
         public string date;
+
+        public string direction;
     }
 }

@@ -15,7 +15,7 @@ namespace LinkMobile.Services
         public async Task<FacebookProfile> GetFacebookProfileAsync(string accessToken)
         {
             var requestUrl =
-                "https://graph.facebook.com/v2.7/me/?fields=email,first_name,last_name&access_token="
+                "https://graph.facebook.com/v4.0/me?fields=email,first_name,last_name&access_token="
                 + accessToken;
 
 
@@ -26,6 +26,18 @@ namespace LinkMobile.Services
             var facebookProfile = JsonConvert.DeserializeObject<FacebookProfile>(userJson);
 
             return facebookProfile;
+        }
+
+        public async Task Logout(string accessToken, string userId)
+        {
+            var requestUrl =
+                "https://graph.facebook.com/v4.0/" + userId + "/permissions?method=delete&access_token="
+                + accessToken;
+
+            var httpClient = new HttpClient();
+
+            var response = await httpClient.GetStringAsync(requestUrl);
+
         }
     }
 }

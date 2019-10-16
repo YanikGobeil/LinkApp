@@ -52,7 +52,7 @@ namespace LinkMobile.Services
             return await Execute(async () => await _restClient.GetAsync<List<TResp>>(new Uri($"{RootUrl}{path}"), _header, cancellationToken));
         }
 
-        public async Task<TResp> PostAsync<TReq, TResp>(string path, TReq requestObject, CancellationToken cancellationToken) where TResp : BaseResponse
+            public async Task<TResp> PostAsync<TReq, TResp>(string path, TReq requestObject, CancellationToken cancellationToken) where TResp : BaseResponse
         {
             return await Execute(async () => await _restClient.PostAsync<TReq, TResp>(new Uri($"{RootUrl}{path}"), requestObject, _header, cancellationToken));
         }
@@ -70,7 +70,7 @@ namespace LinkMobile.Services
             }
             catch (Exception e) when (e is ApiException ae && (ae.StatusCode == ApiStatus.Unauthorized || ae.StatusCode == ApiStatus.Forbidden))
             {
-                _masterNavigationService.SetMainPage(new HomePage());
+                _masterNavigationService.SetMainPage(new HomePage(false));
                 throw;
             }
         }

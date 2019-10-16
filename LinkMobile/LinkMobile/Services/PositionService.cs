@@ -10,16 +10,16 @@ namespace LinkMobile.Services
 {
     public class PositionService : IPositionService
     {
+
         public async Task<Position> getCurrentPosition()
         {
+            
             Position currentpos = new Position();
 
             currentpos.Latitude = 45.379655;
             currentpos.Longitude = -71.927801;
 
-
-
-            return currentpos;
+            return currentpos;         
         }
 
         public async Task<List<Xamarin.Forms.Maps.Position>> getRouteCoordinates()

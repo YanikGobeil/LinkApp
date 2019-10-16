@@ -10,7 +10,7 @@ namespace LinkMobile.Models
 
         public string Date { get; set; }
 
-        public string Cip { get; set; }
+        public string Email { get; set; }
 
         public string Directions { get; set; }
     }

@@ -2,6 +2,8 @@
 using LinkMobile.Network.Request;
 using LinkMobile.Network.Response;
 using LinkMobile.Services.Interfaces;
+using LinkMobile.Services.Interfaces.Persistence;
+using LinkMobile.Static;
 using LinkMobile.ViewModels.Base;
 using LinkMobile.Views;
 using System;
@@ -27,6 +29,7 @@ namespace LinkMobile.ViewModels
         //private vars
         private IMasterNavigationService _masterNavigationService;
         private IReservationService _reservationService;
+        private IPersistenceService _persistenceService;
         private IPageService _pageService;
 
         private string _direction;
@@ -46,12 +49,15 @@ namespace LinkMobile.ViewModels
         public ICommand OnAppearingCommandForDirections { get; private set; }
         public ICommand OnAppearingCommandForMinDate { get; private set; }
         public ICommand OnDisappearingCommand { get; private set; }
-        public ICommand DateSelectedCommand => new Command(async () => await GetAvailableHoursForDateAndDirection());
+        public ICommand OnHoursFocused { get; private set; }
         public ICommand CreateReservationCommand { get; private set; }
-        public ICommand DirectionSelectedCommand => new Command(async () => await GetAvailableHoursForDateAndDirection());
         public ICommand CancelReservationCommand { get; private set; }
 
-        public ReservationViewModel(IMasterNavigationService masterNavigationService, IReservationService reservationService, IPageService pageService)
+        public ICommand DirectionChangedCommand { get; private set; }
+
+        public ICommand DateSelectedCommand { get; private set; }
+
+        public ReservationViewModel(IMasterNavigationService masterNavigationService, IReservationService reservationService, IPageService pageService, IPersistenceService persistenceService)
         {
             //init publics
             TimeList = new ObservableCollection<string>();
@@ -62,11 +68,14 @@ namespace LinkMobile.ViewModels
             OnAppearingCommandForMinDate = new Command(SetMinDate);
             CreateReservationCommand = new Command(async () => await CreateReservation());
             CancelReservationCommand = new Command(CancelReservation);
+            DirectionChangedCommand = new Command(async () => await GetAvailableHoursForDateAndDirection());
+            DateSelectedCommand = new Command(async () => await GetAvailableHoursForDateAndDirection());
 
             //init privates
             _masterNavigationService = masterNavigationService;
             _reservationService = reservationService;
             _pageService = pageService;
+            _persistenceService = persistenceService;
         }
 
         //bindings
@@ -108,43 +117,20 @@ namespace LinkMobile.ViewModels
 
         private async Task GetAvailableHoursForDateAndDirection()
         {
-            if (_selectedDate != null && _direction != null)
-            {           
-                try
-                {
-                    _userReservationDate = _selectedDate.Date.ToString();
-                    List<string> allHoursList = await _reservationService.GetAllHours(_direction);
-                    await _uniqueExecutionTaskQueue.Execute(async (token) =>
-                    {
-                        
-                        //CancellationToken token = new CancellationToken();
-                        DateTime newSelectedDate = new DateTime();
-                        UseTempDateTime(newSelectedDate);
-
-                        /*
-                        await Task.Factory.StartNew(() =>
-                        {
-                            var response =   _reservationService.GetReservationsForDateAndDirections(pathDateAndDirections, Direction, SelectedDate, token);
-                            ParseHourArrays(allHoursList, response);
-                        });*/
-
-                        /*
-                        var response = await _reservationService.GetReservationsForDateAndDirections(pathDateAndDirections, Direction, SelectedDate, token);
-                        ParseHourArrays(allHoursList, response);
-
-                        //parse values using the allHoursList  
-                        */
-                        ParseHourArrays(allHoursList, null);
-                        TimeList.Clear();
-                        allHoursList.ForEach(time => TimeList.Add(time));
-                    });
-                }
-                catch(Exception e)
-                {
-                    await _pageService.DisplayAlert("Erreur", e.Message + "_" + _direction + "__" + _selectedDate.ToString(), "OK");
-                }
-                
+            if (SelectedDate != null && Direction != null && Direction != "")
+            {
+                CancellationToken token = new CancellationToken();
+                List<ReservationResponse> reservations = await _reservationService.GetReservationsForDateAndDirections(pathDateAndDirections, Direction, SelectedDate, token);
+                _userReservationDate = _selectedDate.Date.ToString();
+                List<string> allHoursList = _reservationService.GetAllHours(_direction);
+                DateTime newSelectedDate = new DateTime();
+                UseTempDateTime(newSelectedDate);
+                ParseHourArrays(allHoursList);
+                RemoveReservedHours(allHoursList, reservations);
+                TimeList.Clear();
+                allHoursList.ForEach(time => TimeList.Add(time));
             }
+             
         }
 
         public async Task CreateReservation()
@@ -157,7 +143,7 @@ namespace LinkMobile.ViewModels
                     _userReservation = new Reservation();
                     _userReservation.Time = _userReservationTime;
                     _userReservation.Date = _userReservationDate;
-                    _userReservation.Cip = "goby2801";      //TODO : userReservation.Cip = getUserDetails.... then send reservation object to server
+                    _userReservation.Email = _persistenceService.GetPersistenceValueWithKey("email").ToString();
                     _userReservation.Directions = _direction;
 
                     //cast userReservation object to Treq object
@@ -168,7 +154,7 @@ namespace LinkMobile.ViewModels
                     var token = new CancellationToken();
                     var response = await _reservationService.CreateReservation(path, Treq, token);
                     await _pageService.DisplayAlert("Confirmation", "Réservation créée avec succès!", "OK");
-                    await _masterNavigationService.NavigateToPage(new HomePage());
+                    await _masterNavigationService.NavigateToPage(new HomePage(false));
                 }
                 else
                 {
@@ -196,7 +182,8 @@ namespace LinkMobile.ViewModels
 
         public void CastReservationToPostRequestReservation(PostReservationRequest Treq)      
         {
-            Treq.userCIP = _userReservation.Cip;
+            Treq.user = StaticValues.currentUser;
+
             if (_userReservation.Directions == DIRECTION_UDES)
             {
                 Treq.directionName = "UdeS";
@@ -221,25 +208,8 @@ namespace LinkMobile.ViewModels
             Treq.startDateTime = dt;
         }
 
-        private void ParseHourArrays(List<string> hours, List<ReservationResponse> reservations)
+        private void ParseHourArrays(List<string> hours)
         {
-            /*
-            //var reservs = await reservations;
-            for (int i = 0; i < reservations.Count; i++)
-            {
-                for (int j = 0; j < hours.Count; j++)
-                {
-                    if ((reservations[i].startDateTime.Hour.ToString() + ":" + reservations[i].startDateTime.Minute.ToString()) == hours[j])
-                    {
-                        hours.RemoveAt(j);
-                        j = j - 1;
-                    }
-
-                    
-                }
-
-            }*/
-
             if (_selectedDate != null)
             {
                 if (_selectedDate.Date == DateTime.Now.Date)
@@ -268,6 +238,24 @@ namespace LinkMobile.ViewModels
             
         }
 
+        private void RemoveReservedHours(List<string> hours, List<ReservationResponse> reservations)
+        {
+            //var reservs = await reservations;
+            for (int i = 0; i < reservations.Count; i++)
+            {
+                for (int j = 0; j < hours.Count; j++)
+                {
+                    if ((reservations[i].startDateTime.Hour.ToString() + ":" + reservations[i].startDateTime.Minute.ToString()) == hours[j])
+                    {
+                        hours.RemoveAt(j);
+                        j = j - 1;
+                    }
+
+                }
+
+            }
+        }
+
         private void UseTempDateTime(DateTime dt)
         {
             DateTime now = DateTime.Now;
@@ -275,5 +263,6 @@ namespace LinkMobile.ViewModels
             dt = dt.AddHours(now.Hour);
             dt = dt.AddMinutes(now.Minute);           
         }
+
     }
 }

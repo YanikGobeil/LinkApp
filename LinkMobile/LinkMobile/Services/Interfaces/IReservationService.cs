@@ -11,7 +11,7 @@ namespace LinkMobile.Services.Interfaces
 {
     public interface IReservationService
     {
-        Task<List<string>> GetAllHours(string directions);
+        List<string> GetAllHours(string directions);
 
         Task<List<ReservationResponse>> GetReservationsForDateAndDirections(string path, string directions, DateTime selectedDate, CancellationToken token);
 

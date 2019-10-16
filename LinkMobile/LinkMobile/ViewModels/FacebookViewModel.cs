@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using LinkMobile.Models;
 using LinkMobile.Services;
+using LinkMobile.Services.Interfaces;
+using LinkMobile.Static;
+using LinkMobile.Views;
 
 namespace LinkMobile.ViewModels
 {
@@ -28,7 +31,22 @@ namespace LinkMobile.ViewModels
         {
             var facebookServices = new FacebookService();
 
-            FacebookProfile = await facebookServices.GetFacebookProfileAsync(accessToken);
+            try
+            {
+                FacebookProfile = await facebookServices.GetFacebookProfileAsync(accessToken);
+                StaticValues.staticFacebookProfile = FacebookProfile;
+                StaticValues.currentUser = new User()
+                {
+                    email = FacebookProfile.Email,
+                    firstName = FacebookProfile.FirstName,
+                    lastName = FacebookProfile.LastName
+                };
+            }
+            catch(Exception e)
+            {
+                
+            }
+           
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

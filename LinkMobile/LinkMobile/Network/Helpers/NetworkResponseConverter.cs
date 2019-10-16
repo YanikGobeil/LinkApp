@@ -12,7 +12,7 @@ namespace LinkMobile.Network.Helpers
         {
             Reservation res = new Reservation();
 
-            res.Cip = response.userCIP;
+            res.Email = response.userEmail;
             res.Date = response.startDateTime.Date.ToString();
             res.Time = response.startDateTime.TimeOfDay.ToString();
             res.Directions = response.directionName;
