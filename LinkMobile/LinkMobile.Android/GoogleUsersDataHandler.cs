@@ -28,7 +28,7 @@ namespace LinkMobile.Droid
                     user.firstName = StaticAuth.currentUser.firstName;
                     user.lastName = StaticAuth.currentUser.lastName;
                     user.email = StaticAuth.currentUser.email;
-                    user.givenId = StaticAuth.currentUser.givenId;
+                    user.userId = StaticAuth.currentUser.userId;
                     return user;
                 }
                 catch

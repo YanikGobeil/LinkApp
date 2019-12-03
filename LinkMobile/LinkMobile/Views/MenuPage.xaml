@@ -9,16 +9,16 @@
                 <Label Text="LinkMobile" TextColor="White" FontSize="30" HorizontalOptions="Center" />
             </StackLayout>
             <StackLayout Padding="10" VerticalOptions="FillAndExpand">
-                    <customControllers:NavigationItem Text="Acceuil" TapCommand="{Binding OpenHomeCommand}" Resource="white_home_icon" />
+                    <customControllers:NavigationItem Text="Accueil" TapCommand="{Binding OpenHomeCommand}" Resource="white_home_icon" ImageScale="2.0"/>
                     <BoxView Color="#61666d" HeightRequest="0.5" />
                      <!-- <customControllers:NavigationItem Text="Horaire" TapCommand="{Binding OpenScheduleCommand}" Resource="schedule_icon" /> -->
-                    <customControllers:NavigationItem Text="Réservation" TapCommand="{Binding OpenReservationCommand}" Resource="reservation_icon" />
+                <customControllers:NavigationItem Text="Réservation" TapCommand="{Binding OpenReservationCommand}" Resource="reservation_icon" ImageScale="2.0"/>
                     <BoxView Color="#61666d" HeightRequest="0.5" />
                     <!--<customControllers:NavigationItem Text="Mes Réservations" TapCommand="{Binding OpenMyReservationsCommand}" Resource="account_icon" />
                     <BoxView Color="#61666d" HeightRequest="0.5" /> -->
-                    <customControllers:NavigationItem Text="Localisation" TapCommand="{Binding OpenLocalisationCommand}" Resource="map_icon2" />
+                <customControllers:NavigationItem Text="Localisation" TapCommand="{Binding OpenLocalisationCommand}" Resource="map_icon2"  ImageScale="1.5"/>
                     <BoxView Color="#61666d" HeightRequest="0.5" />
-                    <customControllers:NavigationItem Text="Déconnexion" TapCommand="{Binding OpenNewConnectionCommand}" Resource="logout_icon"/>
+                <customControllers:NavigationItem Text="Déconnexion" TapCommand="{Binding OpenNewConnectionCommand}" Resource="logout" ImageScale="1.5"/>
                     <BoxView Color="#61666d" HeightRequest="0.5" />
             </StackLayout>
         </StackLayout>

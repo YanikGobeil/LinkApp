@@ -17,6 +17,7 @@
                     HorizontalOptions="Start"    
                     Text="Destination"
                     TextColor="DarkGreen"
+                    FontAttributes="Bold"
                     FontSize="Large">
                 </Label>
                 <Picker
@@ -26,7 +27,8 @@
                     HeightRequest="70"
                     SelectedItem="{Binding Direction}"
                     ItemsSource="{Binding DirectionsList}"
-                    SelectedIndexChanged="Direction_Changed">
+                    SelectedIndexChanged="Direction_Changed"
+                    TitleColor="DarkGreen">
 
                 </Picker>
             </StackLayout>
@@ -37,6 +39,7 @@
                 <Label Text="Date et heure"
                         VerticalOptions="FillAndExpand" 
                         HorizontalOptions="Start" 
+                        FontAttributes="Bold"
                         TextColor="DarkGreen"
                         FontSize="Large">
                 </Label>
@@ -59,29 +62,37 @@
                 ItemsSource="{Binding TimeList}"
                 HeightRequest="70"
                 SelectedItem="{Binding UserReservationTime}"
-                Focused="Picker_Focused">
+                Focused="Picker_Focused"
+                SelectedIndexChanged="Time_Selected_Changed"
+                TitleColor="DarkGreen"
+                IsEnabled="{Binding IsTimeListEnabled}">
                 </Picker>
+                
             </StackLayout>
             
             <StackLayout VerticalOptions="FillAndExpand"  
                 Spacing="6"
                 Padding="0,3,0,3"
                 Orientation="Horizontal">
-                 <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Orientation="Horizontal">  
+                 <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand" Orientation="Horizontal"> 
+                     
                 <Button
                     HorizontalOptions="EndAndExpand"
                     Text="ANNULER"
                     Clicked="Cancel_Button_Clicked"
                     BackgroundColor="Transparent"
-                     FontSize="Medium">
+                    FontSize="Medium">
                 </Button>
+                     
                 <Button
                     HorizontalOptions="End"
                     Text="OK"
+                    FontAttributes="Bold"
                     Clicked="Button_Clicked"
                     TextColor="DarkGreen"
                     BackgroundColor="Transparent"
-                    FontSize="Medium">
+                    FontSize="Medium"
+                    IsEnabled="{Binding IsCreateButtonEnabled}">
                 </Button>
             </StackLayout>
                        </StackLayout>

@@ -11,7 +11,13 @@
     </ContentPage.BindingContext>
 
     <StackLayout x:Name="MainStackLayout" >
-
+        <Image
+            Source="commanditaires.jpg"
+            VerticalOptions="CenterAndExpand"
+            HorizontalOptions="CenterAndExpand"
+            Scale="1.0">
+        </Image>
+            <!-- 
             <Grid RowSpacing="20"
               Padding="20, 20, 10, 20"
               VerticalOptions="FillAndExpand">
@@ -38,7 +44,7 @@
                             <customControllers:MyReservationsList IsRefreshing="{Binding MyReservationsViewModel.IsRefreshing}"
                                                                   ModifyReservationCommand="{Binding MyReservationsViewModel.ModifyReservation}"
                                                                   EmptyListMessage="Aucune réservation à afficher" />
-                                                                 <!-- MyReservations ="{Binding MyReservationsViewModel.MyReservationsDisplay}"  -->
+                                                                  MyReservations ="{Binding MyReservationsViewModel.MyReservationsDisplay}"  
                         </StackLayout>
                     </StackLayout>
 
@@ -46,6 +52,7 @@
 
                 
             </Grid>
+    -->
         </StackLayout>
 
 </ContentPage>

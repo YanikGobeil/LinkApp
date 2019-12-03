@@ -13,8 +13,8 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="7*" />
         </Grid.ColumnDefinitions>
-        <Image HorizontalOptions="Start" Grid.Column="0" Source="{Binding Resource, Source={x:Reference this}, Converter={StaticResource stringToResourceConverter}}"/>
-        <Label Grid.Column="1" Text="{Binding Text, Source={x:Reference this}}" FontSize="Medium" TextColor="Gray" FontAttributes="Bold"  VerticalOptions="Center" />
+        <Image HorizontalOptions="Start" Grid.Column="0" Source="{Binding Resource, Source={x:Reference this}, Converter={StaticResource stringToResourceConverter}}" Scale="{Binding ImageScale, Source={x:Reference this}}" />
+        <Label Grid.Column="1" Text="{Binding Text, Source={x:Reference this}}" FontSize="Medium" TextColor="DarkGreen" FontAttributes="Bold"  VerticalOptions="Center" />
     </Grid>
     <Grid.GestureRecognizers>
         <TapGestureRecognizer Command="{Binding TapCommand, Source={x:Reference this}}" />

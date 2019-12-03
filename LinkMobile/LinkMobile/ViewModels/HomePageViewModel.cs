@@ -68,55 +68,67 @@ namespace LinkMobile.ViewModels
         private async Task<PostUserRequest> RegisterUser()
         {
             PostUserRequest request = new PostUserRequest();
+            request = await Task.Run(async () =>
+            {
+                
 
-            if (StaticValues.currentUser != null && StaticValues.staticFacebookProfile == null)
-            {
-                try
-                {
-                    request.email = StaticValues.currentUser.email;
-                    request.firstName = StaticValues.currentUser.firstName;
-                    request.lastName = StaticValues.currentUser.lastName;
-                    CancellationToken token = new CancellationToken();
-                    var condition = await _userService.GetUserByEmail(PATH_USERS, request.email, token);
-                    if (condition == null)
-                    {
-                        var response = await _userService.CreateUser(PATH_USERS, request, token);
-                    }
-                        
-                }
-                catch (Exception e)
-                {
-                    await _pageService.DisplayAlert("Erreur de requête", e.Message, "OK");
-                }
-            }
-            else if (StaticValues.currentUser == null && StaticValues.staticFacebookProfile != null)
-            {
-                try
-                {
-                    request.email = StaticValues.staticFacebookProfile.Email;
-                    request.firstName = StaticValues.staticFacebookProfile.FirstName;
-                    request.lastName = StaticValues.staticFacebookProfile.LastName;
-                    CancellationToken token = new CancellationToken();
-                    var condition = await _userService.GetUserByEmail(PATH_USERS, request.email, token);
-                    if (condition == null)
-                    {
-                        var response = await _userService.CreateUser(PATH_USERS, request, token);
-                    }
-                        
-                }
-                catch (Exception e)
-                {
-                    await _pageService.DisplayAlert("Erreur de requête", e.Message, "OK");
-                }
-            }
-            else
-            {
-                if (_persistenceService.GetPersistenceValueWithKey("email") == null)
-                {
-                    await _pageService.DisplayAlert("Erreur native", "Impossible d'identifier l'utilisateur correctement.", "OK");
-                }               
-            }
 
+                if (StaticValues.currentUser != null && StaticValues.staticFacebookProfile == null)
+                {
+                    try
+                    {
+                        request.email = StaticValues.currentUser.email;
+                        request.firstName = StaticValues.currentUser.firstName;
+                        request.lastName = StaticValues.currentUser.lastName;
+                        CancellationToken token = new CancellationToken();
+
+                        var condition = await _userService.GetUserByEmail(PATH_USERS, request.email, token);
+                        if (condition == null)
+                        {
+                            var response = await _userService.CreateUser(PATH_USERS, request, token);
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+                        //await _pageService.DisplayAlert("Erreur de requête", e.Message, "OK");
+                    }
+                }
+                else if (StaticValues.currentUser == null && StaticValues.staticFacebookProfile != null)
+                {
+                    try
+                    {
+                        if (StaticValues.staticFacebookProfile.Email == null && StaticValues.currentUser == null)
+                        {
+                            _persistenceService.SetPersistenceValueAndKey("email", "yanik.gobeil@hotmail.com");
+                        }
+
+                        request.email = StaticValues.staticFacebookProfile.Email;
+                        request.firstName = StaticValues.staticFacebookProfile.FirstName;
+                        request.lastName = StaticValues.staticFacebookProfile.LastName;
+                        CancellationToken token = new CancellationToken();
+                        var condition = await _userService.GetUserByEmail(PATH_USERS, request.email, token);
+                        if (condition == null)
+                        {
+                            var response = await _userService.CreateUser(PATH_USERS, request, token);
+                        }
+
+                    }
+                    catch (Exception e)
+                    {
+                       // await _pageService.DisplayAlert("Erreur de requête", e.Message, "OK");
+                    }
+                }
+                else
+                {
+                    if (_persistenceService.GetPersistenceValueWithKey("email") == null)
+                    {
+                       // await _pageService.DisplayAlert("Erreur native", "Impossible d'identifier l'utilisateur correctement.", "OK");
+                    }
+                }
+
+                return request;
+            });
             return request;
         }
      
@@ -133,7 +145,7 @@ namespace LinkMobile.ViewModels
             }
             catch (Exception e)
             {
-                _pageService.DisplayAlert("Erreur de persistence", e.Message ,"OK");
+               // _pageService.DisplayAlert("Erreur de persistence", e.Message ,"OK");
             }
             
         }

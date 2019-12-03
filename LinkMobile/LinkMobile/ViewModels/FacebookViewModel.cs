@@ -35,12 +35,6 @@ namespace LinkMobile.ViewModels
             {
                 FacebookProfile = await facebookServices.GetFacebookProfileAsync(accessToken);
                 StaticValues.staticFacebookProfile = FacebookProfile;
-                StaticValues.currentUser = new User()
-                {
-                    email = FacebookProfile.Email,
-                    firstName = FacebookProfile.FirstName,
-                    lastName = FacebookProfile.LastName
-                };
             }
             catch(Exception e)
             {

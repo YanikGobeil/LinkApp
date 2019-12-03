@@ -40,8 +40,11 @@ namespace LinkMobile.ViewModels
             //SetHighlightedRoute();
 
             //for DEMO, init pin at first position
-            VehiculePositionPins.Add(new Pin() { Position = new Xamarin.Forms.Maps.Position(coordinatesX[0], coordinatesY[0]), Type = PinType.Generic, Label = "Navette autonome" });
-            UserPosition = new Xamarin.Forms.Maps.Position(coordinatesX[3], coordinatesY[3]);
+            //VehiculePositionPins.Add(new Pin() { Position = new Xamarin.Forms.Maps.Position(coordinatesX[0], coordinatesY[0]), Type = PinType.Generic, Label = "Navette autonome" });
+            VehiculePositionPins.Add(new Pin() { Position = new Xamarin.Forms.Maps.Position(45.378963, -71.927798), Type = PinType.Generic, Label = "Navette autonome" });
+            //UserPosition = new Xamarin.Forms.Maps.Position(coordinatesX[3], coordinatesY[3]);
+            UserPosition = new Xamarin.Forms.Maps.Position(45.378963, -71.927798);
+            
 
             //init private vars   
             _navigationService = masterNavigationService;
@@ -49,14 +52,14 @@ namespace LinkMobile.ViewModels
             _positionService = positionService;
         
             
-
-            //SetPositionsCommand = new Command(async () => await SetPositions());
+            /*
+            SetPositionsCommand = new Command(async () => await SetPositions());
             timer = new System.Timers.Timer();
             timer.Interval = 2000;
 
             timer.Elapsed += OnTimedEvent;
             timer.AutoReset = true;
-            timer.Enabled = true;
+            timer.Enabled = true;*/
         }
 
         //bindings on property changed

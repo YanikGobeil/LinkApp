@@ -55,5 +55,6 @@ namespace LinkMobile.Views
             _viewModel?.OnAppearingCommand?.Execute(null);
         }
 
+
     }
 }

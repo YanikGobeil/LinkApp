@@ -16,6 +16,9 @@ namespace LinkMobile.Views.CustomControllers
         public static readonly BindableProperty ImageProperty =
             BindableProperty.Create(nameof(Resource), typeof(string), typeof(NavigationItem));
 
+        public static readonly BindableProperty ImageScaleProperty =
+            BindableProperty.Create(nameof(ImageScale), typeof(double), typeof(NavigationItem));
+
         public string Resource
         {
             get { return (string)GetValue(ImageProperty); }
@@ -26,6 +29,12 @@ namespace LinkMobile.Views.CustomControllers
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
+        }
+
+        public double ImageScale
+        {
+            get { return (double)GetValue(ImageScaleProperty); }
+            set { SetValue(ImageScaleProperty, value); }
         }
 
         public ICommand TapCommand

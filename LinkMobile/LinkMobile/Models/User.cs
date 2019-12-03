@@ -12,6 +12,6 @@ namespace LinkMobile.Models
 
         public string email;
 
-        public int givenId;
+        public int userId;
     }
 }

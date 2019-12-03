@@ -32,6 +32,7 @@ namespace LinkMobile.ViewModels
             var response = _persistenceService.GetPersistenceValueWithKey("email");
             if (!response.Equals("error"))
             {
+
                 //bypass login 
                 SetMasterPage();
             }
@@ -44,6 +45,7 @@ namespace LinkMobile.ViewModels
                 _persistenceService.SetPersistenceValueAndKey("email", StaticValues.currentUser.email);
                 _persistenceService.SetPersistenceValueAndKey("first", StaticValues.currentUser.firstName);
                 _persistenceService.SetPersistenceValueAndKey("last", StaticValues.currentUser.lastName);
+                _persistenceService.SetPersistenceValueAndKey("id", StaticValues.currentUser.userId.ToString());
             }           
         }
 

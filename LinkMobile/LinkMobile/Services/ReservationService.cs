@@ -77,7 +77,8 @@ namespace LinkMobile.Services
 
         public async Task<BaseResponse> CreateReservation(string path, PostReservationRequest Treq, CancellationToken token)
         {
-            var response = await _networkService.PostAsync<PostReservationRequest, BaseResponse>(path, Treq, token);
+
+            var response = await _networkService.PostAsync<PostReservationRequest, BaseResponse>($"reservations/" , Treq, token);
             return response;
         }
 

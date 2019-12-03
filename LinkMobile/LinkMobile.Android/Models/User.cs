@@ -17,7 +17,7 @@ namespace LinkMobile.Droid.Models
         public string firstName;
         public string lastName;
         public string email;
-        public int givenId;
+        public int userId;
    
     }
 }

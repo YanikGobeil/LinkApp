@@ -12,35 +12,44 @@
 
     <StackLayout Orientation="Vertical">
 
-        <Label Text="Bienvenue sur LinkMobile"
-           FontSize="66"
+        <Image
+            Source="linkLogo.png"
+            Scale="1"
+            VerticalOptions="Center"
+            HorizontalOptions="CenterAndExpand"
+            Margin="10,10,10,10">
+        </Image>
+        
+        <Label Text="LinkMobile"
+           FontSize="40"
            FontFamily="Sprint"
+           FontAttributes="Bold"
            TextColor="Black"
            HorizontalTextAlignment="Center"
+           HorizontalOptions="CenterAndExpand"
+           VerticalOptions="CenterAndExpand"
            Margin="10,10,0,0"/>
 
-        <Button Text="Connexion avec Facebook"                
-            TextColor="White"
-            BackgroundColor="White"
-            Font="Bold"
-            FontSize="26"
-            BorderColor="Black"
-            BorderWidth="2"
-            BorderRadius="3"
-            Margin="5,5,5,5"
-            Clicked="LoginWithFacebook_Clicked"
-            />
+        <ImageButton Source="facebookloginicon.png"                    
+                    ScaleY="0.60"              
+                    Clicked="LoginWithFacebook_Clicked"
+                    HorizontalOptions="Center"
+                    BorderColor="Black"
+                    BorderWidth="2"
+                    CornerRadius="10"                   
+                    Margin="5,5,5,5"
+                    VerticalOptions="Center" />
 
-        <Button Text="Connexion avec Google"
-            TextColor="White"
-            BackgroundColor="DeepSkyBlue"
-            Font="Bold"
-            FontSize="26"
-            BorderColor="Black"
-            BorderWidth="2"
-            BorderRadius="3"
-            Margin="5,5,5,5"
-            Clicked="LoginWithGoogle_Clicked"/>
+        <ImageButton Source="googlelogin.png"                    
+                    Scale="1"
+                    Clicked="LoginWithGoogle_Clicked"
+                    HorizontalOptions="Center"
+                    BorderColor="Black"
+                    BorderWidth="2"
+                    CornerRadius="10"                   
+                    Margin="5,5,5,5"
+                    VerticalOptions="Center" />
+
 
     </StackLayout> 
     

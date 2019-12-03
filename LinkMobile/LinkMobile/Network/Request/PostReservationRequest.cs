@@ -15,8 +15,7 @@ namespace LinkMobile.Network.Request
 
         public string directionName;
 
-        public int reservationId;
     }
 
-   
+
 }

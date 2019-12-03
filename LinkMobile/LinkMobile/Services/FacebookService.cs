@@ -5,8 +5,10 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using LinkMobile.Models;
+using LinkMobile.Services.Interfaces.Persistence;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Xamarin.Forms;
 
 namespace LinkMobile.Services
 {
@@ -14,6 +16,9 @@ namespace LinkMobile.Services
     {
         public async Task<FacebookProfile> GetFacebookProfileAsync(string accessToken)
         {
+            //clear webviews cache
+            DependencyService.Get<IWebCookiesPersistenceService>().RemoveCookies();
+
             var requestUrl =
                 "https://graph.facebook.com/v4.0/me?fields=email,first_name,last_name&access_token="
                 + accessToken;

@@ -20,6 +20,7 @@ namespace LinkMobile.Droid
         {
             base.OnCreate(savedInstanceState);
 
+            System.Threading.Thread.Sleep(5000);
             StartActivity(typeof(MainActivity));
             Finish();
             OverridePendingTransition(0,0);

@@ -68,6 +68,7 @@ namespace LinkMobile.ViewModels
 
                 StaticValues.staticFacebookProfile = null;
                 StaticValues.accessToken = null;
+
             }
 
             //clear google data if connected by google
@@ -76,11 +77,12 @@ namespace LinkMobile.ViewModels
             if (user != null)
             {
                 _userDataHandler.ClearGoogleUserData();
+                StaticValues.currentUser = null;
             }
                    
             //clear the persistence
             _persistenceService.ClearPreferences();
-
+            
             //clear webviews cache
             DependencyService.Get<IWebCookiesPersistenceService>().RemoveCookies();
 

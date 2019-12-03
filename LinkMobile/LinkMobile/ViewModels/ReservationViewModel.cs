@@ -30,6 +30,7 @@ namespace LinkMobile.ViewModels
         private IMasterNavigationService _masterNavigationService;
         private IReservationService _reservationService;
         private IPersistenceService _persistenceService;
+        private IUserService _userService;
         private IPageService _pageService;
 
         private string _direction;
@@ -38,6 +39,8 @@ namespace LinkMobile.ViewModels
         private DateTime _selectedDate;
         private DateTime _minDate;
         private Reservation _userReservation;
+        private bool _isTimeListEnabled;
+        private bool _isCreateButtonEnabled;
 
 
         //public vars
@@ -57,7 +60,9 @@ namespace LinkMobile.ViewModels
 
         public ICommand DateSelectedCommand { get; private set; }
 
-        public ReservationViewModel(IMasterNavigationService masterNavigationService, IReservationService reservationService, IPageService pageService, IPersistenceService persistenceService)
+        public ICommand HoursSelectedCommand { get; private set; }
+
+        public ReservationViewModel(IMasterNavigationService masterNavigationService, IReservationService reservationService, IPageService pageService, IPersistenceService persistenceService, IUserService userService)
         {
             //init publics
             TimeList = new ObservableCollection<string>();
@@ -70,12 +75,14 @@ namespace LinkMobile.ViewModels
             CancelReservationCommand = new Command(CancelReservation);
             DirectionChangedCommand = new Command(async () => await GetAvailableHoursForDateAndDirection());
             DateSelectedCommand = new Command(async () => await GetAvailableHoursForDateAndDirection());
+            HoursSelectedCommand = new Command(EnableCreateButton);
 
             //init privates
             _masterNavigationService = masterNavigationService;
             _reservationService = reservationService;
             _pageService = pageService;
             _persistenceService = persistenceService;
+            _userService = userService;
         }
 
         //bindings
@@ -103,6 +110,18 @@ namespace LinkMobile.ViewModels
             set { SetValue(ref _minDate, value); }
         }
 
+        public bool IsTimeListEnabled
+        {
+            get { return _isTimeListEnabled; }
+            set { SetValue(ref _isTimeListEnabled, value); }
+        }
+
+        public bool IsCreateButtonEnabled
+        {
+            get { return _isCreateButtonEnabled; }
+            set { SetValue(ref _isCreateButtonEnabled, value); }
+        }
+
         public void SetDirectionsList()
         {
             DirectionsList.Clear();
@@ -117,58 +136,81 @@ namespace LinkMobile.ViewModels
 
         private async Task GetAvailableHoursForDateAndDirection()
         {
-            if (SelectedDate != null && Direction != null && Direction != "")
+            await Task.Run(async () =>
             {
-                CancellationToken token = new CancellationToken();
-                List<ReservationResponse> reservations = await _reservationService.GetReservationsForDateAndDirections(pathDateAndDirections, Direction, SelectedDate, token);
-                _userReservationDate = _selectedDate.Date.ToString();
-                List<string> allHoursList = _reservationService.GetAllHours(_direction);
-                DateTime newSelectedDate = new DateTime();
-                UseTempDateTime(newSelectedDate);
-                ParseHourArrays(allHoursList);
-                RemoveReservedHours(allHoursList, reservations);
-                TimeList.Clear();
-                allHoursList.ForEach(time => TimeList.Add(time));
-            }
-             
+                if (SelectedDate != null && Direction != null && Direction != "")
+                {
+                    
+                    CancellationToken token = new CancellationToken();
+                    List<ReservationResponse> reservations = await _reservationService.GetReservationsForDateAndDirections(pathDateAndDirections, Direction, SelectedDate, token);
+                    _userReservationDate = _selectedDate.Date.ToString();
+                    List<string> allHoursList = _reservationService.GetAllHours(_direction);
+                    DateTime newSelectedDate = new DateTime();
+                    UseTempDateTime(newSelectedDate);
+                    //ParseHourArrays(allHoursList);
+                    //RemoveReservedHours(allHoursList, reservations);
+                    Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                    {
+                        TimeList.Clear();
+                        allHoursList.ForEach(time => TimeList.Add(time));
+                        IsTimeListEnabled = true;
+                    });
+                   
+                }
+            });
+                    
         }
 
         public async Task CreateReservation()
-        {          
+        {
+
             try
             {
-                if (_userReservationTime != null && _userReservationDate != null && _direction != null)
+                await Task.Run(async () =>
                 {
-                    //set userReservation private variable
-                    _userReservation = new Reservation();
-                    _userReservation.Time = _userReservationTime;
-                    _userReservation.Date = _userReservationDate;
-                    _userReservation.Email = _persistenceService.GetPersistenceValueWithKey("email").ToString();
-                    _userReservation.Directions = _direction;
+                    //UserResponse user = await _userService.GetUserByEmail(path, _persistenceService.GetPersistenceValueWithKey("email").ToString(), new CancellationToken());
+                    UserResponse user = await _userService.GetUserByEmail(path, "yanik.gobeil@hotmail.com", new CancellationToken());
+                    _persistenceService.SetPersistenceValueAndKey("id", user.userId.ToString());
+                    if (_userReservationTime != null && _userReservationDate != null && _direction != null)
+                    {
+                        //set userReservation private variable
+                        _userReservation = new Reservation();
+                        _userReservation.Time = _userReservationTime;
+                        _userReservation.Date = _userReservationDate;
+                        _userReservation.Email = _persistenceService.GetPersistenceValueWithKey("email").ToString();
+                        _userReservation.Directions = _direction;
 
-                    //cast userReservation object to Treq object
-                    PostReservationRequest Treq = new PostReservationRequest();
-                    CastReservationToPostRequestReservation(Treq);
+                        //cast userReservation object to Treq object
+                        PostReservationRequest Treq = new PostReservationRequest();
+                        CastReservationToPostRequestReservation(Treq, user);
 
-                    //call API
-                    var token = new CancellationToken();
-                    var response = await _reservationService.CreateReservation(path, Treq, token);
-                    await _pageService.DisplayAlert("Confirmation", "Réservation créée avec succès!", "OK");
-                    await _masterNavigationService.NavigateToPage(new HomePage(false));
-                }
-                else
-                {
-                    throw new NullReferenceException("Une donnée est manquante à la complétion de la réservation.");
-                }
+                        PostReservationRequestContainer TreqCont = new PostReservationRequestContainer();
+                        TreqCont.reservation = Treq;
+
+                        //call API
+                        var token = new CancellationToken();
+                        var response = await _reservationService.CreateReservation(path, Treq, token);
+
+                    }
+                    else
+                    {
+                        throw new NullReferenceException("Une donnée est manquante à la complétion de la réservation.");
+                    }
+                });
+
+                //reset variables
+                CancelReservation();
+                await _pageService.DisplayAlert("Confirmation", "Réservation créée avec succès!", "OK");
+                await _masterNavigationService.NavigateToPage(new HomePage(false));
             }
             catch (Exception e)
-            {              
+            {
                 await _pageService.DisplayAlert("Erreur", e.Message, "OK");
             }
 
-            //reset variables
-            CancelReservation();
         }
+
+       
 
         public void CancelReservation()
         {
@@ -178,11 +220,24 @@ namespace LinkMobile.ViewModels
             _userReservationDate = null;
             SelectedDate = DateTime.Today;
             TimeList.Clear();
+            IsTimeListEnabled = false;
+            IsCreateButtonEnabled = false;
         }
 
-        public void CastReservationToPostRequestReservation(PostReservationRequest Treq)      
+        public void CastReservationToPostRequestReservation(PostReservationRequest Treq, UserResponse user)      
         {
-            Treq.user = StaticValues.currentUser;
+            Treq.user = StaticValues.currentUser;               
+            if (Treq.user == null)
+            {
+                Treq.user = new User();
+                Treq.user.email = user.email;
+                Treq.user.firstName = user.firstName;
+                Treq.user.lastName = user.lastName;
+                Treq.user.userId = user.userId;
+
+                object t = _persistenceService.GetPersistenceValueWithKey("id");
+                Treq.user.userId = Int32.Parse(t.ToString());
+            }
 
             if (_userReservation.Directions == DIRECTION_UDES)
             {
@@ -193,7 +248,7 @@ namespace LinkMobile.ViewModels
                 Treq.directionName = _userReservation.Directions;
             }
             
-            Treq.endDateTime = new DateTime();
+            Treq.endDateTime = new DateTime(2019, 10, 18, 9, 0, 0);
 
             //cast string date to Date
             DateTime dt = new DateTime();
@@ -262,6 +317,11 @@ namespace LinkMobile.ViewModels
             dt = _selectedDate;
             dt = dt.AddHours(now.Hour);
             dt = dt.AddMinutes(now.Minute);           
+        }
+
+        private void EnableCreateButton()
+        {
+            IsCreateButtonEnabled = true;
         }
 
     }

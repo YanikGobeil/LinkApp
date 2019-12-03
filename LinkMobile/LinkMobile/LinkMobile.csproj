@@ -13,10 +13,12 @@
 
   <ItemGroup>
     <None Remove="Resources\black_arrow.png" />
+    <None Remove="Resources\fblogin.png" />
+    <None Remove="Resources\googlelogin.png" />
     <None Remove="Resources\logo1.png" />
     <None Remove="Resources\account_icon.png" />
     <None Remove="Resources\black_home_icon.png" />
-    <None Remove="Resources\logout-icon.jpg" />
+    <None Remove="Resources\logout.png" />
     <None Remove="Resources\map_icon2.png" />
     <None Remove="Resources\map_icon1.png" />
     <None Remove="Resources\photo_equipe.png" />
@@ -27,10 +29,12 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\black_arrow.png" />
+    <EmbeddedResource Include="Resources\fblogin.png" />
+    <EmbeddedResource Include="Resources\googlelogin.png" />
     <EmbeddedResource Include="Resources\logo1.png" />
     <EmbeddedResource Include="Resources\account_icon.png" />
     <EmbeddedResource Include="Resources\black_home_icon.png" />
-    <EmbeddedResource Include="Resources\logout-icon.jpg" />
+    <EmbeddedResource Include="Resources\logout.png" />
     <EmbeddedResource Include="Resources\map_icon2.png" />
     <EmbeddedResource Include="Resources\map_icon1.png" />
     <EmbeddedResource Include="Resources\photo_equipe.png" />

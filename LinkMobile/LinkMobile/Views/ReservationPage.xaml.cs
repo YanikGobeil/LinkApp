@@ -58,6 +58,11 @@ namespace LinkMobile.Views
         {
             _viewModel?.DateSelectedCommand?.Execute(null);
         }
+
+        private void Time_Selected_Changed(object sender, EventArgs e)
+        {
+            _viewModel?.HoursSelectedCommand?.Execute(null);
+        }
     }
 
 
